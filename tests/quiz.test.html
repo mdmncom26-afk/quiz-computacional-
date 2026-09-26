@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testes — Quiz Computacional</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 760px; padding: 0 1rem; }
+      li { margin: .5rem 0; padding: .6rem; border-radius: .4rem; }
+      .pass { background: #e6f7ed; color: #146c3b; }
+      .fail { background: #fff0ee; color: #a3241d; }
+    </style>
+  </head>
+  <body>
+    <h1>Testes da lógica do Quiz Computacional</h1>
+    <p id="summary">Executando testes…</p>
+    <ul id="results"></ul>
+
+    <script type="module">
+      import { validateQuestions } from "../js/data.js";
+      import {
+        advance, cancelRestart, confirmAnswer, createAttempt, getScore, requestRestart, restart, selectAlternative
+      } from "../js/quiz.js";
+
+      const results = document.querySelector("#results");
+      const summary = document.querySelector("#summary");
+      const tests = [];
+      const assert = (condition, message) => { if (!condition) throw new Error(message); };
+      const expectThrow = (action) => { let threw = false; try { action(); } catch { threw = true; } assert(threw, "Era esperado um erro."); };
+      const question = (index) => ({
+        id: `q${index}`,
+        statement: `Questão ${index}`,
+        alternatives: [
+          { id: "a", text: "Correta", isCorrect: true },
+          { id: "b", text: "Incorreta 1", isCorrect: false },
+          { id: "c", text: "Incorreta 2", isCorrect: false },
+          { id: "d", text: "Incorreta 3", isCorrect: false }
+        ]
+      });
+      const questions = Array.from({ length: 10 }, (_, index) => question(index + 1));
+      const addTest = (name, action) => tests.push({ name, action });
+
+      addTest("Valida dez questões com quatro alternativas e uma correta", () => {
+        assert(validateQuestions(questions) === questions, "As questões válidas devem ser aceitas.");
+      });
+      addTest("Rejeita questão com número incorreto de alternativas", () => {
+        const invalid = structuredClone(questions); invalid[0].alternatives.pop(); expectThrow(() => validateQuestions(invalid));
+      });
+      addTest("Exige seleção antes da confirmação", () => expectThrow(() => confirmAnswer(createAttempt(questions))));
+      addTest("Permite trocar a alternativa antes de confirmar", () => {
+        let state = createAttempt(questions); state = selectAlternative(state, "b"); state = selectAlternative(state, "a");
+        assert(confirmAnswer(state).confirmedAnswers[0].isCorrect, "A última seleção deve ser confirmada.");
+      });
+      addTest("Bloqueia alteração após a confirmação", () => {
+        let state = selectAlternative(createAttempt(questions), "a"); state = confirmAnswer(state); expectThrow(() => selectAlternative(state, "b"));
+      });
+      addTest("Calcula 0%, 70% e 100%", () => {
+        for (const correctCount of [0, 7, 10]) {
+          let state = createAttempt(questions);
+          for (let index = 0; index < 10; index += 1) {
+            state = selectAlternative(state, index < correctCount ? "a" : "b"); state = confirmAnswer(state); state = advance(state);
+          }
+          assert(getScore(state).percentage === correctCount * 10, `Percentual incorreto para ${correctCount} acertos.`);
+        }
+      });
+      addTest("Mantém resultado ao cancelar reinício e zera ao confirmar", () => {
+        let state = createAttempt(questions);
+        for (let index = 0; index < 10; index += 1) { state = selectAlternative(state, "a"); state = confirmAnswer(state); state = advance(state); }
+        const result = getScore(state); state = requestRestart(state); state = cancelRestart(state);
+        assert(getScore(state).correct === result.correct, "Cancelar deve preservar o resultado.");
+        state = requestRestart(state); state = restart(state);
+        assert(state.currentQuestionIndex === 0 && state.confirmedAnswers.length === 0 && state.status === "answering", "Reinício deve zerar a tentativa.");
+      });
+
+      let passed = 0;
+      for (const test of tests) {
+        const item = document.createElement("li");
+        try { test.action(); passed += 1; item.className = "pass"; item.textContent = `✓ ${test.name}`; }
+        catch (error) { item.className = "fail"; item.textContent = `✗ ${test.name}: ${error.message}`; }
+        results.append(item);
+      }
+      summary.textContent = `${passed} de ${tests.length} testes aprovados.`;
+    </script>
+  </body>
+</html>

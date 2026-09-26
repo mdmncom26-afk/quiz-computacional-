@@ -1,0 +1,102 @@
+[
+  {
+    "id": "q1",
+    "statement": "Qual componente executa instruções em um computador?",
+    "alternatives": [
+      { "id": "a", "text": "Processador", "isCorrect": true },
+      { "id": "b", "text": "Monitor", "isCorrect": false },
+      { "id": "c", "text": "Teclado", "isCorrect": false },
+      { "id": "d", "text": "Mouse", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q2",
+    "statement": "Qual destes itens é um dispositivo de entrada?",
+    "alternatives": [
+      { "id": "a", "text": "Impressora", "isCorrect": false },
+      { "id": "b", "text": "Teclado", "isCorrect": true },
+      { "id": "c", "text": "Caixa de som", "isCorrect": false },
+      { "id": "d", "text": "Projetor", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q3",
+    "statement": "O que significa a sigla CPU?",
+    "alternatives": [
+      { "id": "a", "text": "Central de Programas Úteis", "isCorrect": false },
+      { "id": "b", "text": "Controle Principal do Usuário", "isCorrect": false },
+      { "id": "c", "text": "Unidade Central de Processamento", "isCorrect": true },
+      { "id": "d", "text": "Computador Pessoal Universal", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q4",
+    "statement": "Qual extensão é normalmente associada a um arquivo de texto simples?",
+    "alternatives": [
+      { "id": "a", "text": ".txt", "isCorrect": true },
+      { "id": "b", "text": ".jpg", "isCorrect": false },
+      { "id": "c", "text": ".mp3", "isCorrect": false },
+      { "id": "d", "text": ".exe", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q5",
+    "statement": "Qual opção descreve melhor a internet?",
+    "alternatives": [
+      { "id": "a", "text": "Um único computador muito grande", "isCorrect": false },
+      { "id": "b", "text": "Uma rede mundial de redes", "isCorrect": true },
+      { "id": "c", "text": "Um programa de edição de textos", "isCorrect": false },
+      { "id": "d", "text": "Um tipo de impressora", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q6",
+    "statement": "Qual programa é usado para navegar em páginas da web?",
+    "alternatives": [
+      { "id": "a", "text": "Navegador", "isCorrect": true },
+      { "id": "b", "text": "Sistema operacional", "isCorrect": false },
+      { "id": "c", "text": "Antivírus", "isCorrect": false },
+      { "id": "d", "text": "Editor de imagens", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q7",
+    "statement": "Qual unidade costuma medir a capacidade de armazenamento de arquivos?",
+    "alternatives": [
+      { "id": "a", "text": "Byte", "isCorrect": true },
+      { "id": "b", "text": "Volt", "isCorrect": false },
+      { "id": "c", "text": "Hertz", "isCorrect": false },
+      { "id": "d", "text": "Pixel", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q8",
+    "statement": "Qual é a função principal de uma senha forte?",
+    "alternatives": [
+      { "id": "a", "text": "Aumentar a tela", "isCorrect": false },
+      { "id": "b", "text": "Proteger o acesso a uma conta", "isCorrect": true },
+      { "id": "c", "text": "Acelerar a internet", "isCorrect": false },
+      { "id": "d", "text": "Imprimir documentos", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q9",
+    "statement": "O que um sistema operacional faz?",
+    "alternatives": [
+      { "id": "a", "text": "Gerencia o hardware e os programas do computador", "isCorrect": true },
+      { "id": "b", "text": "Substitui todos os aplicativos", "isCorrect": false },
+      { "id": "c", "text": "Cria a conexão com a internet sozinho", "isCorrect": false },
+      { "id": "d", "text": "Serve apenas para jogos", "isCorrect": false }
+    ]
+  },
+  {
+    "id": "q10",
+    "statement": "Qual prática ajuda a evitar a perda de arquivos importantes?",
+    "alternatives": [
+      { "id": "a", "text": "Fazer cópias de segurança", "isCorrect": true },
+      { "id": "b", "text": "Desligar o monitor", "isCorrect": false },
+      { "id": "c", "text": "Apagar a lixeira todos os dias", "isCorrect": false },
+      { "id": "d", "text": "Usar sempre a mesma senha", "isCorrect": false }
+    ]
+  }
+]
